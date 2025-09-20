@@ -425,6 +425,9 @@ class AddGamesWindow(ModelessDialog):  # pylint: disable=too-many-public-methods
         }
         if win_ver_task:
             installer["script"]["installer"].insert(0, win_ver_task)
+        if installer_preset.endswith("3dfx"):
+            # installer["script"]["wine"] = {"dgvoodoo2": True}
+            installer["script"]["wine"] = {"cnc_ddraw": True}
         application = Gio.Application.get_default()
         application.show_installer_window([installer])
         self.destroy()

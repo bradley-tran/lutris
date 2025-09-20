@@ -46,6 +46,7 @@ from lutris.util.strings import split_arguments
 from lutris.util.wine import proton
 from lutris.util.wine.d3d_extras import D3DExtrasManager
 from lutris.util.wine.dgvoodoo2 import dgvoodoo2Manager
+from lutris.util.wine.cnc_ddraw import cncDdrawManager
 from lutris.util.wine.dxvk import REQUIRED_VULKAN_API_VERSION, DXVKManager
 from lutris.util.wine.dxvk_nvapi import DXVKNVAPIManager
 from lutris.util.wine.extract_icon import PEFILE_AVAILABLE, IconExtractor
@@ -464,6 +465,29 @@ class wine(Runner):
                 "Enable Proton's support for High Dynamic Range graphics. "
                 "Requires Wayland selected as Graphics backend."
             ),
+        },
+        {
+            "option": "cnc_ddraw",
+            "section": _("Graphics"),
+            "label": _("Enable cnc-ddraw"),
+            "type": "bool",
+            "default": False,
+            "advanced": False,
+            "help": _(
+                "cnc-ddraw is a DirectDraw to GDI/OpenGL/D3D9 translation layer "
+                "it should be used along with DXVK. Only 2D games using DirectDraw are supported. "
+                "(not Direct3D). Don't use it together with dgvoodoo2."
+            ),
+        },
+        {
+            "option": "cnc_ddraw_version",
+            "section": _("Graphics"),
+            "label": _("cnc-ddraw version"),
+            "advanced": True,
+            "type": "choice_with_entry",
+            "choices": lambda: cncDdrawManager().version_choices,
+            "default": lambda: cncDdrawManager().version,
+            "conditional_on": "cnc_ddraw",
         },
         {
             "option": "esync",
@@ -1228,6 +1252,7 @@ class wine(Runner):
             (DXVKNVAPIManager, "dxvk_nvapi", "dxvk_nvapi_version"),
             (D3DExtrasManager, "d3d_extras", "d3d_extras_version"),
             (dgvoodoo2Manager, "dgvoodoo2", "dgvoodoo2_version"),
+            (cncDdrawManager, "cnc_ddraw", "cnc_ddraw_version"),
         ]
 
         managers = {}
