@@ -24,6 +24,7 @@ from lutris.util.log import logger
 from lutris.util.strings import parse_version
 from lutris.util.wine.d3d_extras import D3DExtrasManager
 from lutris.util.wine.dgvoodoo2 import dgvoodoo2Manager
+from lutris.util.wine.cnc_ddraw import cncDdrawManager
 from lutris.util.wine.dxvk import DXVKManager
 from lutris.util.wine.dxvk_nvapi import DXVKNVAPIManager
 from lutris.util.wine.vkd3d import VKD3DManager
@@ -36,6 +37,7 @@ DLL_MANAGERS = {
     "vkd3d": VKD3DManager,
     "d3d_extras": D3DExtrasManager,
     "dgvoodoo2": dgvoodoo2Manager,
+    "cnc_ddraw": cncDdrawManager,
     "dxvk_nvapi": DXVKNVAPIManager,
 }
 
