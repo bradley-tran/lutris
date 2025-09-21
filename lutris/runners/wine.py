@@ -413,7 +413,7 @@ class wine(Runner):
             "advanced": False,
             "help": _(
                 "cnc-ddraw is a DirectDraw to GDI/OpenGL/D3D9 translation layer "
-                "it should be used along with DXVK. Only 2D games using DirectDraw are supported. "
+                "It should be used along with DXVK. Only 2D games using DirectDraw are supported. "
                 "(not Direct3D). Don't use it together with dgvoodoo2."
             ),
         },
