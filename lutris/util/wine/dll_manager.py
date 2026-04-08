@@ -118,6 +118,9 @@ class DLLManager:
 
     def load_versions(self) -> list:
         if not system.path_exists(self.versions_path):
+            logger.warning(
+                "Path %s doesn't exist.", self.versions_path
+            )
             return []
 
         with open(self.versions_path, "r", encoding="utf-8") as dll_version_file:
@@ -284,6 +287,9 @@ class DLLManager:
             # We have to make sure that the dll exists before setting it to native
             if self.dll_exists(dll):
                 overrides[dll] = "n"
+                # logger.warning("Enabled DLL %s", dll)
+            else:
+                logger.warning("Dll %s not exist", dll)
 
         return overrides
 
@@ -303,6 +309,7 @@ class DLLManager:
             self.enable_dll(system_dir, arch, dll_path)
         for appdata_dir, file, filename in self._iter_appdata_files():
             source_path = os.path.join(self.path, filename)
+            logger.warning("Trying to enable %s to appdata_dir %s", source_path, appdata_dir)
             self.enable_user_file(appdata_dir, file, source_path)
 
     def disable(self):
